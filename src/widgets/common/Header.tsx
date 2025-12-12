@@ -26,15 +26,18 @@ export default function Header() {
         <div className="flex flex-[1.2] items-center justify-center sm:justify-center">
           <div className="relative flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-white/90 shadow-[0_10px_40px_rgba(79,70,229,0.25)]">
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-            <h1 className="text-2xl font-bold tracking-tight">
-              Sparkz <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-fuchsia-300 to-amber-200 animate-[pulse_7s_ease-in-out_infinite]">'25</span>
+            <h1 className="text-xl font-bold tracking-tight">
+              Sparkz{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-fuchsia-300 to-amber-200 animate-[pulse_7s_ease-in-out_infinite]">
+                &apos;25
+              </span>
             </h1>
           </div>
         </div>
 
         {/* Right nav + CTA */}
         <div className="hidden flex-1 items-center justify-end gap-4 text-sm text-white/80 sm:flex">
-          {navItems?.slice(0, 2).map((item, index) => (
+          {navItems?.slice(2, 4).map((item, index) => (
             <Link
               key={index}
               href={item?.to}
@@ -43,15 +46,25 @@ export default function Header() {
               {item?.title}
             </Link>
           ))}
-          <button className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white backdrop-blur transition hover:border-white/30 hover:bg-white/10">
-            Contact
+          <button
+            className="inline-flex items-center justify-center z-30 
+             bg-linear-to-r from-indigo-500 via-fuchsia-500 to-amber-400 
+             gap-2 rounded-full border border-white/20 
+             cursor-pointer
+             border-x-0
+             px-4 py-2 text-sm font-semibold text-white 
+             backdrop-blur-sm transition-all 
+             hover:from-indigo-600 hover:via-fuchsia-600 hover:to-amber-500 
+             hover:scale-[1.02] active:scale-95"
+          >
+            Login
           </button>
         </div>
 
         {/* Mobile actions */}
         <div className="flex w-full items-center justify-between gap-3 sm:hidden">
           <div className="flex items-center gap-2 text-xs text-white/80">
-            {navItems?.slice(0, 2).map((item, index) => (
+            {navItems?.slice(1, 4).map((item, index) => (
               <Link
                 key={index}
                 href={item?.to}
@@ -62,13 +75,20 @@ export default function Header() {
             ))}
           </div>
           <button
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-2 text-xs font-semibold text-white backdrop-blur transition hover:border-white/30 hover:bg-white/10"
-            aria-label="Contact Sparkz team"
+            className="inline-flex items-center justify-center z-30 
+             bg-linear-to-r from-indigo-500 via-fuchsia-500 to-amber-400 
+             gap-2 rounded-full border border-white/20 
+             cursor-pointer
+             border-x-0
+             px-4 py-2 text-sm font-semibold text-white 
+             backdrop-blur-sm transition-all 
+             hover:from-indigo-600 hover:via-fuchsia-600 hover:to-amber-500 
+             hover:scale-[1.02] active:scale-95"
           >
-            Contact
+            Login
           </button>
         </div>
       </div>
     </header>
-  )
+  );
 }

@@ -110,26 +110,26 @@ export default function Hero() {
           className="order-2 w-full max-w-3xl space-y-6 text-center md:order-1 md:w-1/2 md:text-left"
         >
           <motion.div
-  initial={{ opacity: 0, scale: 0.96 }}
-  whileInView={{ opacity: 1, scale: 1 }}
-  viewport={{ once: true, amount: 0.6 }}
-  transition={{ duration: 0.7, ease: "easeOut" }}
-  className="inline-flex items-center text-center gap-2 rounded-full border border-white/10 bg-white/5 px-2.5 py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/80 backdrop-blur"
->
-  Carmel College of Engineering and Technology presents
-</motion.div>
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="inline-flex items-center text-center gap-2 rounded-full border border-white/10 bg-white/5 px-2.5 py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/80 backdrop-blur"
+          >
+            Carmel College of Engineering and Technology presents
+          </motion.div>
 
-{/* NEW: Spark the date badge! 🔥 */}
-<motion.div
-  initial={{ opacity: 0, y: 10 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-  className="mx-auto md:mx-0 inline-flex items-center gap-3 rounded-full border border-cyan-300/30 bg-cyan-500/10 px-5 py-3 text-xs font-bold text-cyan-200 backdrop-blur-sm"
->
-  <span className="h-3 w-3 rounded-full bg-cyan-400 animate-ping" />
-  <span>January 16 - 17, 2026</span>
-</motion.div>
+          {/* NEW: Spark the date badge! 🔥 */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            className="mx-auto md:mx-0 inline-flex items-center gap-3 rounded-full border border-cyan-300/30 bg-cyan-500/10 px-5 py-3 text-xs font-bold text-cyan-200 backdrop-blur-sm"
+          >
+            <span className="h-3 w-3 rounded-full bg-cyan-400 animate-ping" />
+            <span>January 16 - 17, 2026</span>
+          </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
@@ -138,8 +138,8 @@ export default function Hero() {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="text-3xl font-bold leading-tight text-white drop-shadow-sm sm:text-3xl lg:text-3xl"
           >
-            <span className="relative block mt-2 text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-400">
-              Sparkz '25
+            <span className="relative block mt-2 text-7xl sm:text-6xl lg:text-7xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-400">
+              Sparkz &apos;25
             </span>
             Innvovation Unleashed
           </motion.h1>
