@@ -1,10 +1,39 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
 export default function Hero() {
+  // mount gating: anything that depends on randomness, measurements, or
+  // browser-only values is computed after mount to avoid hydration mismatch.
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // deterministic particle data computed only on mount
+  const particles = useMemo(() => {
+    // if not mounted, return an empty array (keeps server markup deterministic).
+    if (typeof window === "undefined") return [];
+    // deterministic pseudo-random generator based on index
+    const seeded = (i: number) => {
+      // deterministic but varied values
+      const s = Math.sin(i * 12.9898 + 78.233) * 43758.5453;
+      return s - Math.floor(s);
+    };
+
+    return Array.from({ length: 12 }).map((_, i) => {
+      const angle = (i / 12) * 360;
+      const delay = i * 0.2;
+      const duration = 12 + seeded(i) * 8;
+      const radius = 140 + seeded(i + 7) * 60; // distance from center
+      return { i, angle, delay, duration, radius };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mounted]);
+
   return (
     <section className="relative isolate overflow-hidden bg-[#04050b] text-white">
       {/* Ambient + grid */}
@@ -13,13 +42,14 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(255,255,255,0.05),transparent_40%),radial-gradient(circle_at_80%_10%,rgba(79,70,229,0.12),transparent_38%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:140px_140px] opacity-20" />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(14,165,233,0.08),transparent_40%),linear-gradient(240deg,rgba(236,72,153,0.08),transparent_35%)] opacity-60" />
+
       {/* Circuit overlay */}
       <div className="pointer-events-none absolute inset-0 mix-blend-screen opacity-25">
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(56,189,248,0.12)_1px,transparent_1px),linear-gradient(0deg,rgba(56,189,248,0.08)_1px,transparent_1px),linear-gradient(135deg,rgba(94,234,212,0.08)_1px,transparent_1px)] bg-[size:180px_180px,180px_180px,220px_220px]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(56,189,248,0.2),transparent_16%),radial-gradient(circle_at_38%_62%,rgba(94,234,212,0.2),transparent_14%),radial-gradient(circle_at_78%_28%,rgba(236,72,153,0.2),transparent_16%),radial-gradient(circle_at_62%_82%,rgba(244,114,182,0.16),transparent_14%)]" />
       </div>
 
-      {/* Floating chips */}
+      {/* Floating chips (static/deterministic props) */}
       {[
         {
           className:
@@ -84,10 +114,10 @@ export default function Hero() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.6 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[13px] font-semibold uppercase tracking-[0.18em] text-white/80 backdrop-blur"
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/80 backdrop-blur"
           >
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-            Sparkz '25 • Engineering Tech Fest
+            Sparkz '25 • CCET Tech Fest
           </motion.div>
 
           <motion.h1
@@ -98,7 +128,16 @@ export default function Hero() {
             className="text-4xl font-bold leading-tight text-white drop-shadow-sm sm:text-5xl lg:text-6xl"
           >
             Build loud. Think bold.
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-fuchsia-300 to-amber-200 animate-[pulse_7s_ease-in-out_infinite]">
+            <span
+              className="relative block mt-2 text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-400"
+              style={{
+                textShadow: `
+                  0 0 20px rgba(236, 72, 153, 0.7),
+                  0 0 35px rgba(129, 140, 248, 0.6),
+                  0 0 50px rgba(251, 191, 36, 0.4)
+                `,
+              }}
+            >
               Sparkz '25
             </span>
           </motion.h1>
@@ -108,31 +147,22 @@ export default function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.45 }}
             transition={{ duration: 0.65, ease: "easeOut", delay: 0.05 }}
-            className="max-w-2xl text-lg text-white/80 sm:text-xl"
+            className="max-w-md text-[17px] text-white/80 sm:text-[17px]"
           >
             Robotics, AI, circuits, code, and design — two days of prototyping,
             playful competition, and engineering energy after dark.
           </motion.p>
 
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-start">
-            <button className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-400 px-6 py-3 text-base font-semibold text-white shadow-[0_20px_80px_rgba(99,102,241,0.35)] transition hover:scale-[1.02] hover:shadow-[0_20px_90px_rgba(236,72,153,0.45)]">
+            <button className="group text-[14px] inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-400 px-6 py-3 text-base font-semibold text-white shadow-[0_20px_80px_rgba(99,102,241,0.35)] transition hover:scale-[1.02] hover:shadow-[0_20px_90px_rgba(236,72,153,0.45)]">
               Register Now
               <span className="transition group-hover:translate-x-1">→</span>
-            </button>
-            <button className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-base font-semibold text-white/90 backdrop-blur transition hover:border-white/30 hover:bg-white/10">
-              View Tracks
             </button>
           </div>
 
           <div className="grid w-full max-w-2xl grid-cols-1 gap-3 text-sm sm:grid-cols-3">
             <Stat label="Engineering Tracks" value="Robotics • AI • IoT" />
-            <Stat label="Participants" value="3k+" />
             <Stat label="Prize Pool" value="₹5L+" />
-          </div>
-
-          <div className="mx-auto mt-2 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[13px] text-white/80 backdrop-blur md:mx-0">
-            <span className="h-2 w-2 animate-ping rounded-full bg-cyan-300" />
-            Campus Arena • March 15 - 16 • Late-night lab hours
           </div>
         </motion.div>
 
@@ -144,30 +174,57 @@ export default function Hero() {
           transition={{ duration: 0.75, ease: "easeOut", delay: 0.05 }}
           className="order-1 relative flex w-full items-center justify-center md:order-2 md:w-1/2 md:-mt-6 lg:-mt-60"
         >
-          <div className="absolute -inset-10 rounded-full bg-gradient-to-br from-indigo-500/25 via-fuchsia-500/20 to-amber-400/20 blur-3xl" />
           <div className="relative h-56 w-56 sm:h-64 sm:w-64">
+            {/* Rotating dashed ring removed */}
+            {/* Decorative gradient layers removed */}
+
+            {/* KEEP: subtle animated halo removed (no circular bg) */}
+            {/* TECH PARTICLES & FLOATING ATOMS AROUND THE LOGO */}
+            {mounted &&
+              particles.map((p) => {
+                const angleRad = (p.angle * Math.PI) / 180;
+                const initX = Math.cos(angleRad) * p.radius;
+                const initY = Math.sin(angleRad) * p.radius;
+
+                return (
+                  <motion.div
+                    key={`particle-${p.i}`}
+                    className="pointer-events-none absolute left-1/2 top-1/2"
+                    initial={{
+                      x: initX,
+                      y: initY,
+                      scale: 0,
+                      opacity: 0.2,
+                    }}
+                    animate={{
+                      x: initX,
+                      y: initY,
+                      scale: [0.3, 1.2, 0.6, 0.3],
+                      opacity: [0.2, 0.8, 0.6, 0.2],
+                    }}
+                    transition={{
+                      duration: p.duration,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: p.delay,
+                    }}
+                  >
+                    {p.i % 3 === 0 && (
+                      <div className="h-3 w-3 rounded-full bg-cyan-400 shadow-[0_0_16px_#06b6d4] blur-[1px]" />
+                    )}
+                    {p.i % 3 === 1 && (
+                      <div className="h-2 w-2 rotate-45 border border-fuchsia-400 shadow-[0_0_12px_#ec4899]" />
+                    )}
+                    {p.i % 3 === 2 && (
+                      <div className="h-4 w-4 rounded-sm bg-gradient-to-br from-amber-400 to-orange-500 shadow-[0_0_20px_#f59e0b] blur-[2px]" />
+                    )}
+                  </motion.div>
+                );
+              })}
+
+            {/* Logo container — no circular background, no border */}
             <motion.div
-              className="absolute inset-2 rounded-full border border-dashed border-fuchsia-300/25"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 18, ease: "linear", repeat: Infinity }}
-            />
-            <div className="absolute inset-6 rounded-full bg-gradient-to-br from-indigo-500/30 via-fuchsia-500/20 to-amber-400/18 blur-2xl" />
-            <motion.div
-              className="absolute inset-3 rounded-full bg-[conic-gradient(from_0deg,rgba(255,255,255,0.05),transparent,rgba(99,102,241,0.12),transparent)] opacity-50"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 14, ease: "linear", repeat: Infinity }}
-            />
-            <motion.div
-              className="pointer-events-none absolute inset-[-22%] rounded-full border border-cyan-300/20"
-              animate={{
-                rotate: [0, 12, -12, 0],
-                scale: [1, 1.06, 1],
-                opacity: [0.18, 0.32, 0.18],
-              }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <motion.div
-              className="relative flex h-full w-full items-center justify-center rounded-full border border-white/15 bg-black/50 backdrop-blur"
+              className="relative flex h-full w-full items-center justify-center bg-transparent"
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
