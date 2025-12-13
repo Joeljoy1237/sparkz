@@ -6,8 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
 export default function Hero() {
-  // mount gating: anything that depends on randomness, measurements, or
-  // browser-only values is computed after mount to avoid hydration mismatch.
+
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -34,6 +33,8 @@ export default function Hero() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted]);
+
+
 
   return (
     <section className="relative isolate overflow-hidden bg-[#04050b] text-white">
@@ -232,6 +233,7 @@ export default function Hero() {
                 src="/sparkz.svg"
                 alt="Sparkz Logo"
                 fill
+                priority
                 className="object-contain drop-shadow-[0_14px_36px_rgba(236,72,153,0.35)]"
                 sizes="256px"
               />

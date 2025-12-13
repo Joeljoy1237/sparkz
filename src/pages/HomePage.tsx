@@ -1,15 +1,15 @@
-import Header from "@/widgets/common/Header";
 import About from "@/widgets/home/About";
 import Hero from "@/widgets/home/Hero";
-import Footer from "@/widgets/common/Footer";
+import Featured from "@/widgets/home/Featured";
+
+import { events } from "@/utils/constants/Constants";
 
 export default function HomePage() {
   return (
     <div>
-      
       <Hero />
+      <Featured events={events} />
       <About />
-      
     </div>
   );
 }
