@@ -13,7 +13,9 @@ export default function Hero() {
     setMounted(true);
   }, []);
 
-  // deterministic particle data computed only on mount
+  const particleCount =
+    typeof window !== "undefined" && window.innerWidth < 400 ? 0 : 8;
+
   const particles = useMemo(() => {
     // if not mounted, return an empty array (keeps server markup deterministic).
     if (typeof window === "undefined") return [];
@@ -24,7 +26,7 @@ export default function Hero() {
       return s - Math.floor(s);
     };
 
-    return Array.from({ length: 12 }).map((_, i) => {
+    return Array.from({ length: particleCount }).map((_, i) => {
       const angle = (i / 12) * 360;
       const delay = i * 0.2;
       const duration = 12 + seeded(i) * 8;
@@ -32,75 +34,79 @@ export default function Hero() {
       return { i, angle, delay, duration, radius };
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mounted]);
-
-
+  }, [particleCount]);
 
   return (
     <section className="relative isolate overflow-hidden bg-[#04050b] text-white">
       {/* Ambient + grid */}
-      <div className="pointer-events-none absolute -left-32 -top-24 h-72 w-72 animate-pulse rounded-full bg-indigo-600/25 blur-[120px]" />
-      <div className="pointer-events-none absolute right-0 top-10 h-80 w-80 animate-[pulse_7s_ease-in-out_infinite] rounded-full bg-fuchsia-500/25 blur-[130px]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(255,255,255,0.05),transparent_40%),radial-gradient(circle_at_80%_10%,rgba(79,70,229,0.12),transparent_38%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:140px_140px] opacity-20" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(14,165,233,0.08),transparent_40%),linear-gradient(240deg,rgba(236,72,153,0.08),transparent_35%)] opacity-60" />
+      {mounted && (
+        <>
+          <div className="pointer-events-none absolute -left-32 -top-24 h-72 w-72 animate-pulse rounded-full bg-indigo-600/25 blur-[120px]" />
+          <div className="pointer-events-none absolute right-0 top-10 h-80 w-80 animate-[pulse_7s_ease-in-out_infinite] rounded-full bg-fuchsia-500/25 blur-[130px]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(255,255,255,0.05),transparent_40%),radial-gradient(circle_at_80%_10%,rgba(79,70,229,0.12),transparent_38%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:140px_140px] opacity-20" />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(14,165,233,0.08),transparent_40%),linear-gradient(240deg,rgba(236,72,153,0.08),transparent_35%)] opacity-60" />
 
-      {/* Circuit overlay */}
-      <div className="pointer-events-none absolute inset-0 mix-blend-screen opacity-25">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(56,189,248,0.12)_1px,transparent_1px),linear-gradient(0deg,rgba(56,189,248,0.08)_1px,transparent_1px),linear-gradient(135deg,rgba(94,234,212,0.08)_1px,transparent_1px)] bg-[size:180px_180px,180px_180px,220px_220px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(56,189,248,0.2),transparent_16%),radial-gradient(circle_at_38%_62%,rgba(94,234,212,0.2),transparent_14%),radial-gradient(circle_at_78%_28%,rgba(236,72,153,0.2),transparent_16%),radial-gradient(circle_at_62%_82%,rgba(244,114,182,0.16),transparent_14%)]" />
-      </div>
+          {/* Circuit overlay */}
+          <div className="pointer-events-none absolute inset-0 mix-blend-screen opacity-25">
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(56,189,248,0.12)_1px,transparent_1px),linear-gradient(0deg,rgba(56,189,248,0.08)_1px,transparent_1px),linear-gradient(135deg,rgba(94,234,212,0.08)_1px,transparent_1px)] bg-[size:180px_180px,180px_180px,220px_220px]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(56,189,248,0.2),transparent_16%),radial-gradient(circle_at_38%_62%,rgba(94,234,212,0.2),transparent_14%),radial-gradient(circle_at_78%_28%,rgba(236,72,153,0.2),transparent_16%),radial-gradient(circle_at_62%_82%,rgba(244,114,182,0.16),transparent_14%)]" />
+          </div>
 
-      {/* Floating chips (static/deterministic props) */}
-      {[
-        {
-          className:
-            "left-[8%] top-[18%] h-7 w-7 rounded-lg border border-cyan-300/50 bg-cyan-400/20 blur-[1px]",
-          y: -12,
-          rot: 8,
-          dur: 6,
-          scale: 1.04,
-        },
-        {
-          className:
-            "right-[10%] top-[26%] h-9 w-9 rounded-xl border border-fuchsia-300/50 bg-fuchsia-400/15 blur-[1px]",
-          y: 14,
-          rot: -10,
-          dur: 7,
-          scale: 1.05,
-        },
-        {
-          className:
-            "left-1/2 bottom-[18%] h-11 w-11 -translate-x-1/2 rounded-2xl border border-amber-300/50 bg-amber-400/15 blur-[1px]",
-          y: -10,
-          rot: 12,
-          dur: 8,
-          scale: 1.06,
-        },
-        {
-          className:
-            "left-[18%] bottom-[26%] h-6 w-6 rounded-md border border-emerald-300/50 bg-emerald-300/15 blur-[1px]",
-          y: 10,
-          rot: -6,
-          dur: 6.5,
-          scale: 1.03,
-        },
-      ].map((chip, idx) => (
-        <motion.div
-          key={idx}
-          className={`pointer-events-none absolute ${chip.className}`}
-          animate={{
-            y: [0, chip.y, 0],
-            rotate: [0, chip.rot, -chip.rot, 0],
-            scale: [1, chip.scale, 1],
-          }}
-          transition={{
-            duration: chip.dur,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
+          {/* Floating chips (static/deterministic props) */}
+          {[
+            {
+              className:
+                "left-[8%] top-[18%] h-7 w-7 rounded-lg border border-cyan-300/50 bg-cyan-400/20 blur-[1px]",
+              y: -12,
+              rot: 8,
+              dur: 6,
+              scale: 1.04,
+            },
+            {
+              className:
+                "right-[10%] top-[26%] h-9 w-9 rounded-xl border border-fuchsia-300/50 bg-fuchsia-400/15 blur-[1px]",
+              y: 14,
+              rot: -10,
+              dur: 7,
+              scale: 1.05,
+            },
+            {
+              className:
+                "left-1/2 bottom-[18%] h-11 w-11 -translate-x-1/2 rounded-2xl border border-amber-300/50 bg-amber-400/15 blur-[1px]",
+              y: -10,
+              rot: 12,
+              dur: 8,
+              scale: 1.06,
+            },
+            {
+              className:
+                "left-[18%] bottom-[26%] h-6 w-6 rounded-md border border-emerald-300/50 bg-emerald-300/15 blur-[1px]",
+              y: 10,
+              rot: -6,
+              dur: 6.5,
+              scale: 1.03,
+            },
+          ]
+            .slice(0, particleCount + 2)
+            .map((chip, idx) => (
+              <motion.div
+                key={idx}
+                className={`pointer-events-none absolute ${chip.className}`}
+                animate={{
+                  y: [0, chip.y, 0],
+                  rotate: [0, chip.rot, -chip.rot, 0],
+                  scale: [1, chip.scale, 1],
+                }}
+                transition={{
+                  duration: chip.dur,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+        </>
+      )}
 
       <div className="relative mx-5 sm:mx-auto flex min-h-[92vh] max-w-6xl flex-col gap-12 pt-10 sm:px-6 pb-15 sm:pb-24 md:flex-row md:items-center md:gap-10">
         {/* Left content */}
@@ -126,7 +132,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="mx-auto md:mx-0 inline-flex items-center gap-3 rounded-full border border-cyan-300/30 bg-cyan-500/10 px-5 py-3 text-xs font-bold text-cyan-200 backdrop-blur-sm"
           >
             <span className="h-1 w-1 sm:h-3 sm:w-3 rounded-full bg-cyan-400 animate-ping" />
@@ -138,9 +144,9 @@ export default function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="text-3xl font-bold leading-tight text-white drop-shadow-sm sm:text-3xl lg:text-3xl"
+            className="text-3xl font-bold leading-tight text-white sm:text-3xl lg:text-3xl"
           >
-            <span className="relative block mt-2 text-6xl sm:text-4xl lg:text-7xl font-extrabold   text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-400">
+            <span className="relative block mt-2 text-6xl sm:text-4xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-indigo-500 via-fuchsia-500 to-amber-400">
               Sparkz &apos;25
             </span>
             Innvovation Unleashed
@@ -149,9 +155,9 @@ export default function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.45 }}
-            transition={{ duration: 0.65, ease: "easeOut", delay: 0.05 }}
-            className="max-w-md text-[17px] text-white/80 sm:text-[17px]"
+            viewport={{ once: true }}
+            transition={{ duration: 0.65, ease: "easeOut" }}
+            className="max-w-lg text-[17px] text-white/80 sm:text-[17px]"
           >
             The fest where students compete, create, and spark something big.
           </motion.p>
@@ -177,7 +183,7 @@ export default function Hero() {
           initial={{ opacity: 0, x: 24 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.75, ease: "easeOut", delay: 0.05 }}
+          transition={{ duration: 0.75, ease: "easeOut" }}
           className="order-1 relative flex w-full items-center justify-center md:order-2 md:w-1/2 md:-mt-6"
         >
           <div className="relative pl-5 h-46 w-46 sm:h-74 sm:w-74">
@@ -235,6 +241,7 @@ export default function Hero() {
                 fill
                 priority
                 className="object-contain drop-shadow-[0_14px_36px_rgba(236,72,153,0.35)]"
+                sizes="(max-width: 768px) 200px, 280px"
               />
             </motion.div>
           </div>

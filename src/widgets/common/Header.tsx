@@ -51,7 +51,7 @@ export default function Header() {
                 {item?.title}
               </Link>
             ))}
-            <button className="inline-flex items-center justify-center z-3 bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-400 gap-2 rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:from-indigo-600 hover:via-fuchsia-600 hover:to-amber-500 hover:scale-[1.02] active:scale-95">
+            <button className="inline-flex items-center justify-center z-3 bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-400 gap-2 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:from-indigo-600 hover:via-fuchsia-600 hover:to-amber-500 hover:scale-[1.02] active:scale-95">
               Login
             </button>
           </div>

@@ -1,6 +1,5 @@
 "use client";
-
-import React from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const accentGradient =
@@ -21,55 +20,59 @@ const aboutPoints = [
   },
 ];
 
-const pillars = [
-  { label: "Tracks", value: "Robotics • AI • IoT" },
-  { label: "Teams", value: "500+" },
-  { label: "Workshops", value: "15+" },
-  { label: "Prize Pool", value: "₹5L+" },
-];
-
 export default function About() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
   return (
     <section
       id="about"
       className="relative isolate overflow-hidden bg-[#04050b] py-20 text-white sm:py-24"
     >
       {/* TOP = PURE BLACK (no glow at the very top) */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#04050b] via-transparent to-transparent h-64" />
+      {mounted && (
+        <>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#04050b] via-transparent to-transparent h-64" />
 
-      {/* GLOW STARTS LOWER & FLOWS DOWN — seamless from Hero */}
-      <div className="pointer-events-none absolute left-[-10%] top-[10%] h-96 w-96 rounded-full bg-indigo-600/25 blur-[140px] animate-pulse" />
-      <div className="pointer-events-none absolute right-[-5%] top-[15%] h-96 w-96 rounded-full bg-fuchsia-500/25 blur-[150px] animate-[pulse_8s_ease-in-out_infinite]" />
-      <div className="pointer-events-none absolute inset-x-0 top-[20%] h-full bg-gradient-to-b from-indigo-600/12 via-fuchsia-500/10 to-amber-400/8 blur-3xl opacity-70" />
+          {/* GLOW STARTS LOWER & FLOWS DOWN — seamless from Hero */}
+          <div className="pointer-events-none absolute left-[-10%] top-[10%] h-96 w-96 rounded-full bg-indigo-600/25 blur-[140px]" />
+          <div className="hidden sm:block pointer-events-none absolute right-[-5%] top-[15%] h-96 w-96 rounded-full bg-fuchsia-500/25 blur-[150px]" />
+          <div className="hidden sm:block pointer-events-none absolute inset-x-0 top-[20%] h-full bg-gradient-to-b from-indigo-600/12 via-fuchsia-500/10 to-amber-400/8 blur-3xl opacity-70" />
 
-      {/* Rest of ambient effects (grid, circuits, etc.) */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(79,70,229,0.15),transparent_45%),radial-gradient(circle_at_70%_70%,rgba(236,72,153,0.12),transparent_40%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_transparent_1px)] bg-[size:140px_140px] opacity-20" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(14,165,233,0.08),transparent_40%),linear-gradient(240deg,rgba(236,72,153,0.08),transparent_35%)] opacity-60" />
+          {/* Rest of ambient effects (grid, circuits, etc.) */}
+          <div className="hidden sm:block pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(79,70,229,0.15),transparent_45%),radial-gradient(circle_at_70%_70%,rgba(236,72,153,0.12),transparent_40%)]" />
+          <div className="hidden sm:block pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_transparent_1px)] bg-[size:140px_140px] opacity-20" />
+          <div className="hidden sm:block pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(14,165,233,0.08),transparent_40%),linear-gradient(240deg,rgba(236,72,153,0.08),transparent_35%)] opacity-60" />
 
-      {/* Circuit overlay */}
-      <div className="pointer-events-none absolute inset-0 mix-blend-screen opacity-25">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(56,189,248,0.12)_1px,transparent_1px),linear-gradient(0deg,rgba(56,189,248,0.08)_1px,transparent_1px),linear-gradient(135deg,rgba(94,234,212,0.08)_1px,transparent_1px)] bg-[size:180px_180px,180px_180px,220px_220px]" />
-      </div>
+          {/* Circuit overlay */}
+          <div className="hidden sm:block pointer-events-none absolute inset-0 mix-blend-screen opacity-25">
+            <div className="hidden sm:block absolute inset-0 bg-[linear-gradient(90deg,rgba(56,189,248,0.12)_1px,transparent_1px),linear-gradient(0deg,rgba(56,189,248,0.08)_1px,transparent_1px),linear-gradient(135deg,rgba(94,234,212,0.08)_1px,transparent_1px)] bg-[size:180px_180px,180px_180px,220px_220px]" />
+          </div>
 
-      {/* Floating chips — now spread smoothly */}
-      {[
-        { className: "left-[15%] top-[12%] h-8 w-8", color: "cyan" },
-        { className: "right-[12%] top-[20%] h-10 w-10", color: "fuchsia" },
-        {
-          className: "left-1/2 top-[55%] -translate-x-1/2 h-12 w-12",
-          color: "amber",
-        },
-        { className: "left-[22%] bottom-[15%] h-7 w-7", color: "emerald" },
-      ].map((chip, i) => (
-        <motion.div
-          key={i}
-          className={`pointer-events-none absolute ${chip.className} rounded-xl border border-${chip.color}-300/50 bg-${chip.color}-400/15 blur-[1px]`}
-          animate={{ y: [-10, 15, -10], rotate: [-8, 8, -8] }}
-          transition={{ duration: 7 + i, repeat: Infinity, ease: "easeInOut" }}
-        />
-      ))}
-
+          {/* Floating chips — now spread smoothly */}
+          {[
+            { className: "right-[12%] top-[20%] h-10 w-10", color: "fuchsia" },
+            {
+              className: "left-1/2 top-[55%] -translate-x-1/2 h-12 w-12",
+              color: "amber",
+            },
+          ].map((chip, i) => (
+            <motion.div
+              key={i}
+              className={`pointer-events-none absolute ${chip.className} rounded-xl border border-${chip.color}-300/50 bg-${chip.color}-400/15 blur-[1px]`}
+              animate={{ y: [-10, 15, -10], rotate: [-8, 8, -8] }}
+              transition={{
+                duration: 7 + i,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </>
+      )}
       {/* CONTENT */}
       <div className="relative z-10 mx-auto max-w-6xl px-6">
         <div className="flex flex-col gap-16 lg:flex-row lg:items-start">
@@ -100,7 +103,7 @@ export default function About() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.9, delay: 0.1 }}
+            transition={{ duration: 0.9 }}
             className="space-y-8 lg:w-3/5"
           >
             <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur overflow-hidden">
