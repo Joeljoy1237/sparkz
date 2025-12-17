@@ -38,7 +38,7 @@ export default function EventsPage() {
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-12"
       >
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(56,189,248,0.06)_1px,transparent_1px),linear-gradient(rgba(56,189,248,0.04)_1px,transparent_1px)] bg-[size:140px_140px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(56,189,248,0.06)_1px,transparent_1px),linear-gradient(rgba(56,189,248,0.04)_1px,transparent_1px)] bg-size-[140px_140px]" />
       </div>
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
@@ -49,7 +49,7 @@ export default function EventsPage() {
           className="text-center mb-12"
         >
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
-            <span className="bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-amber-300 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-indigo-400 via-fuchsia-400 to-amber-300 bg-clip-text text-transparent">
               Sparkz Events
             </span>
           </h1>
@@ -70,8 +70,8 @@ export default function EventsPage() {
                   onClick={() => setSelectedDept(dept)}
                   className={`px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/30 ${
                     active
-                      ? "bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-400 text-white shadow-lg"
-                      : "border border-white/12 bg-white/[0.04] text-white/80 hover:bg-white/[0.06]"
+                      ? "bg-linear-to-r from-indigo-500 via-fuchsia-500 to-amber-400 text-white shadow-lg"
+                      : "border border-white/12 bg-white/4 text-white/80 hover:bg-white/6"
                   }`}
                 >
                   {dept === "All" ? "All Events" : dept}
@@ -104,10 +104,10 @@ export default function EventsPage() {
               >
                 <Link
                   href={`/events/${event.id}`}
-                  className="block rounded-2xl max-w-[360px] border border-white/10 bg-black/40 backdrop-blur transition-all duration-300hover:border-fuchsia-400/40 hover:shadow-lg hover:shadow-fuchsia-500/15"
+                  className="block rounded-2xl max-w-90 border border-white/10 bg-black/40 backdrop-blur transition-all duration-300hover:border-fuchsia-400/40 hover:shadow-lg hover:shadow-fuchsia-500/15"
                 >
                   {/* Poster frame */}
-                  <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden bg-black">
+                  <div className="relative aspect-3/4 w-full rounded-2xl overflow-hidden bg-black">
                     <Image
                       src={event.image}
                       alt={event.title}

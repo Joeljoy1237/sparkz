@@ -5,12 +5,9 @@ import Link from "next/link";
 import CountdownTimer from "@/widgets/event/CountdownTimer";
 import { events } from "@/utils/constants/Constants";
 import parseDate from "@/utils/parseDate";
-import { motion } from "framer-motion";
 import {
   FaClock,
   FaArrowLeft,
-  FaCalendarAlt,
-  FaUserPlus,
   FaLock,
   FaArrowRight,
 } from "react-icons/fa";
@@ -37,7 +34,7 @@ const RegisterButtonSection: React.FC<Props> = ({ eventId }) => {
 
   if (loading) {
     return (
-      <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-gray-900/50 to-gray-800/30 p-6 backdrop-blur-xl">
+      <div className="relative rounded-2xl border border-white/10 bg-linear-to-br from-gray-900/50 to-gray-800/30 p-6 backdrop-blur-xl">
         <div className="animate-pulse space-y-6">
           <div className="h-8 w-48 bg-white/10 rounded-lg"></div>
           <div className="h-32 bg-white/5 rounded-xl"></div>
@@ -71,35 +68,12 @@ const RegisterButtonSection: React.FC<Props> = ({ eventId }) => {
         )
       : true);
 
-  // Calculate participation stats
-  const minParticipants = event?.minParticipation
-    ? Number(
-        event.minParticipation
-          .replace(/Teams?/i, "")
-          .replace(/Participants?/i, "")
-          .trim()
-      )
-    : 0;
-  const maxParticipants = event?.maxParticipation
-    ? Number(
-        event.maxParticipation
-          .replace(/Teams?/i, "")
-          .replace(/Participants?/i, "")
-          .trim()
-      )
-    : Infinity;
-  const currentRegistrations = registrationsByEvent[event.id] || 0;
-  const slotsLeft = maxParticipants - currentRegistrations;
-  const isMinReached = currentRegistrations >= minParticipants;
-  const isEventTypeTeam = event?.eveType?.toLowerCase() === "team";
-  const registrationUnit = isEventTypeTeam ? "teams" : "participants";
-
   return (
     <div className="relative">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-fuchsia-500/5 rounded-3xl blur-3xl" />
+      <div className="absolute inset-0 bg-linear-to-br from-indigo-500/5 via-transparent to-fuchsia-500/5 rounded-3xl blur-3xl" />
 
-      <div className="relative rounded-3xl border border-white/10 bg-gradient-to-br from-gray-900/80 to-gray-900/60 backdrop-blur-2xl overflow-hidden">
+      <div className="relative rounded-3xl border border-white/10 bg-linear-to-br from-gray-900/80 to-gray-900/60 backdrop-blur-2xl overflow-hidden">
         {/* Main Content */}
         <div className="p-8 space-y-8">
           {/* Countdown Timer Section */}
@@ -121,8 +95,8 @@ const RegisterButtonSection: React.FC<Props> = ({ eventId }) => {
           )}
           {/* Registration Closed State */}
           {!isOpenForRegistration && (
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-8 text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-gray-700 to-gray-800 mb-4">
+            <div className="rounded-2xl border border-white/10 bg-linear-to-br from-gray-800/50 to-gray-900/50 p-8 text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-linear-to-br from-gray-700 to-gray-800 mb-4">
                 <FaLock className="text-gray-400 text-2xl" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">
@@ -141,7 +115,7 @@ const RegisterButtonSection: React.FC<Props> = ({ eventId }) => {
               <div className="space-y-4">
                 <Link
                   href={`./${eventId}/register`}
-                  className="group relative flex items-center justify-center gap-3 w-full rounded-xl bg-gradient-to-r from-indigo-600 via-fuchsia-600 to-amber-500 p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_2rem_-0.5rem_#4f46e5]"
+                  className="group relative flex items-center justify-center gap-3 w-full rounded-xl bg-linear-to-r from-indigo-600 via-fuchsia-600 to-amber-500 p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_2rem_-0.5rem_#4f46e5]"
                 >
                   <span className="text-lg font-bold text-white">
                     Register Now
@@ -152,7 +126,7 @@ const RegisterButtonSection: React.FC<Props> = ({ eventId }) => {
             ) : (
               <Link
                 href="/events"
-                className="inline-flex items-center justify-center gap-3 rounded-xl border border-white/20 bg-gradient-to-r from-gray-800 to-gray-900 px-8 py-4 font-medium text-white hover:from-gray-700 hover:to-gray-800 transition-all w-full"
+                className="inline-flex items-center justify-center gap-3 rounded-xl border border-white/20 bg-linear-to-r from-gray-800 to-gray-900 px-8 py-4 font-medium text-white hover:from-gray-700 hover:to-gray-800 transition-all w-full"
               >
                 <FaArrowLeft />
                 <span>Explore Other Events</span>

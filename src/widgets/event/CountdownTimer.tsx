@@ -67,10 +67,10 @@ export default function CountdownTimer({
         animate={{ opacity: 1, scale: 1 }}
         className="relative"
       >
-        <div className="absolute -inset-4 bg-gradient-to-r from-gray-700/20 to-gray-800/20 rounded-2xl blur-xl opacity-60" />
-        <div className="relative rounded-xl border border-gray-700/30 bg-gradient-to-br from-gray-900/40 to-gray-800/20 p-6 backdrop-blur-sm">
+        <div className="absolute -inset-4 bg-linear-to-r from-gray-700/20 to-gray-800/20 rounded-2xl blur-xl opacity-60" />
+        <div className="relative rounded-xl border border-gray-700/30 bg-linear-to-br from-gray-900/40 to-gray-800/20 p-6 backdrop-blur-sm">
           <div className="flex items-center justify-center gap-3">
-            <div className="rounded-full bg-gradient-to-r from-gray-700 to-gray-800 p-3">
+            <div className="rounded-full bg-linear-to-r from-gray-700 to-gray-800 p-3">
               <FaClock className="text-gray-400 text-xl" />
             </div>
             <h3 className="text-lg font-semibold text-gray-300">
@@ -100,7 +100,7 @@ export default function CountdownTimer({
       {/* Animated background glow */}
       <div className="absolute -inset-4 rounded-2xl overflow-hidden pointer-events-none">
         <div
-          className={`absolute inset-0 bg-gradient-to-r ${
+          className={`absolute inset-0 bg-linear-to-r ${
             isCritical
               ? "from-red-500/20 via-orange-500/20 to-amber-500/20"
               : isUrgent
@@ -115,7 +115,7 @@ export default function CountdownTimer({
         {Array.from({ length: 8 }).map((_, i) => (
           <motion.div
             key={i}
-            className={`absolute h-[2px] w-[2px] rounded-full ${
+            className={`absolute h-0.5 w-0.5 rounded-full ${
               isCritical
                 ? "bg-red-400/60"
                 : isUrgent
@@ -143,16 +143,16 @@ export default function CountdownTimer({
       </div>
 
       {/* Main content */}
-      <div className="relative rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-transparent p-6 backdrop-blur-sm">
+      <div className="relative rounded-2xl border border-white/10 bg-linear-to-b from-white/3 to-transparent p-6 backdrop-blur-sm">
         {/* Header */}
         <div className="flex items-center justify-center gap-3 mb-6">
           <div
             className={`rounded-full p-2 ${
               isCritical
-                ? "bg-gradient-to-r from-red-500/20 to-orange-500/20"
+                ? "bg-linear-to-r from-red-500/20 to-orange-500/20"
                 : isUrgent
-                ? "bg-gradient-to-r from-orange-500/20 to-amber-500/20"
-                : "bg-gradient-to-r from-indigo-500/20 to-fuchsia-500/20"
+                ? "bg-linear-to-r from-orange-500/20 to-amber-500/20"
+                : "bg-linear-to-r from-indigo-500/20 to-fuchsia-500/20"
             }`}
           >
             {isCritical ? (
@@ -196,15 +196,15 @@ export default function CountdownTimer({
               <div
                 className={`absolute -inset-1 rounded-xl blur opacity-0 hover:opacity-100 transition-opacity ${
                   isCritical
-                    ? "bg-gradient-to-r from-red-500/30 to-orange-500/30"
+                    ? "bg-linear-to-r from-red-500/30 to-orange-500/30"
                     : isUrgent
-                    ? "bg-gradient-to-r from-orange-500/30 to-amber-500/30"
-                    : "bg-gradient-to-r from-indigo-500/30 to-fuchsia-500/30"
+                    ? "bg-linear-to-r from-orange-500/30 to-amber-500/30"
+                    : "bg-linear-to-r from-indigo-500/30 to-fuchsia-500/30"
                 }`}
               />
 
               {/* Time unit card */}
-              <div className="relative rounded-xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-transparent p-4 backdrop-blur-sm">
+              <div className="relative rounded-xl border border-white/10 bg-linear-to-b from-white/5 to-transparent p-4 backdrop-blur-sm">
                 <motion.p
                   key={unit.value}
                   initial={{ scale: 1.2 }}
@@ -214,7 +214,7 @@ export default function CountdownTimer({
                       ? "text-red-300"
                       : isUrgent
                       ? "text-amber-300"
-                      : "bg-gradient-to-r from-indigo-400 to-fuchsia-400 bg-clip-text text-transparent"
+                      : "bg-linear-to-r from-indigo-400 to-fuchsia-400 bg-clip-text text-transparent"
                   }`}
                 >
                   {unit.value.toString().padStart(2, "0")}
@@ -238,10 +238,10 @@ export default function CountdownTimer({
                   <div
                     className={`h-0.5 w-4 ${
                       isCritical
-                        ? "bg-gradient-to-r from-red-500/50 to-orange-500/50"
+                        ? "bg-linear-to-r from-red-500/50 to-orange-500/50"
                         : isUrgent
-                        ? "bg-gradient-to-r from-orange-500/50 to-amber-500/50"
-                        : "bg-gradient-to-r from-indigo-500/50 to-fuchsia-500/50"
+                        ? "bg-linear-to-r from-orange-500/50 to-amber-500/50"
+                        : "bg-linear-to-r from-indigo-500/50 to-fuchsia-500/50"
                     }`}
                   />
                 </div>

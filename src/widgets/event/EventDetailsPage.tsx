@@ -15,7 +15,6 @@ import {
 import RegisterButtonSection from "@/widgets/event/RegisterButtonSection";
 import {
   FaWhatsapp,
-  FaArrowLeft,
   FaCalendarDay,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
@@ -93,7 +92,7 @@ function InfoCard({
       className={`relative overflow-hidden rounded-2xl p-5 border transition-all duration-300 group
         ${variant === "highlight" 
             ? "bg-indigo-500/10 border-indigo-500/20 hover:bg-indigo-500/20" 
-            : "bg-white/[0.03] border-white/5 hover:bg-white/[0.06] hover:border-white/10"
+            : "bg-white/3 border-white/5 hover:bg-white/6 hover:border-white/10"
         }
       `}
     >
@@ -127,9 +126,9 @@ function CoordinatorCard({
       href={`https://wa.me/${coordinator.phone}?text=${whatsappMessage}`}
       target="_blank"
       rel="noopener noreferrer nofollow"
-      className="flex items-center gap-3 p-3 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.08] transition-colors group"
+      className="flex items-center gap-3 p-3 rounded-xl border border-white/5 bg-white/2 hover:bg-white/8 transition-colors group"
     >
-      <div className="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-500/20 to-fuchsia-500/20 flex items-center justify-center text-white border border-white/10 text-sm font-bold">
+      <div className="h-10 w-10 rounded-full bg-linear-to-br from-indigo-500/20 to-fuchsia-500/20 flex items-center justify-center text-white border border-white/10 text-sm font-bold">
         {coordinator.name.charAt(0)}
       </div>
       <div className="flex-1 min-w-0">
@@ -164,7 +163,7 @@ function PrizeCard({
 
   return (
     <div
-      className={`relative rounded-xl border bg-gradient-to-b p-4 ${styles[color]}`}
+      className={`relative rounded-xl border bg-linear-to-b p-4 ${styles[color]}`}
     >
       <div className="flex items-center gap-3">
         <div
@@ -224,7 +223,7 @@ export default function EventPage({ eventId }: { eventId: string }) {
                 priority
                 sizes="(max-width: 768px) 100vw, (max-width: 1280px) 45vw, 600px"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-60" />
 
               {/* Category Tag on Image */}
               <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-xs font-medium text-white/80 uppercase">
@@ -263,7 +262,7 @@ export default function EventPage({ eventId }: { eventId: string }) {
               className="space-y-4"
             >
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                <span className="bg-gradient-to-r from-white via-indigo-100 to-indigo-300 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-white via-indigo-100 to-indigo-300 bg-clip-text text-transparent">
                   {event.title}
                 </span>
               </h1>
@@ -349,7 +348,7 @@ export default function EventPage({ eventId }: { eventId: string }) {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="relative overflow-hidden rounded-2xl p-6 border border-fuchsia-500/20 bg-gradient-to-br from-fuchsia-900/10 to-transparent"
+                  className="relative overflow-hidden rounded-2xl p-6 border border-fuchsia-500/20 bg-linear-to-br from-fuchsia-900/10 to-transparent"
                 >
                   {/* Decorative Flash */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-fuchsia-500/10 blur-3xl rounded-full pointer-events-none" />
