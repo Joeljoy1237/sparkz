@@ -7,9 +7,9 @@ import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 
 interface Event {
-  id: number;
+  id: string;
   title: string;
-  imageUrl: string;
+  image: string;
   description?: string; // Optional for future hover tooltips
 }
 
@@ -112,28 +112,22 @@ export default function FeaturedEvents({ events }: { events: Event[] }) {
                 >
                   <Link href={`/events/${event.id}`} className="group">
                     <div
-                      className={`relative aspect-3/4 w-70 overflow-hidden rounded-3xl border
+                      className={`relative aspect-4/5 w-70 overflow-hidden rounded-3xl border
                         ${
                           isCenter
                             ? "border-fuchsia-400/40 group-hover:scale-105 shadow-2xl shadow-fuchsia-500/30"
                             : "border-white/10"
                         }
-                        bg-black/40 backdrop-blur-md transition-all duration-500`}
+                         transition-all duration-500`}
                     >
                       {/* Inner glow */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-fuchsia-500/10 to-amber-400/10" />
+                      <div className="absolute inset-0" />
                       <Image
-                        src={event.imageUrl}
+                        src={event.image}
                         alt={event.title}
                         fill
                         className="object-contain transition-transform duration-700"
                       />
-                      {/* Title overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                        {/* <h3 className="text-xl font-bold text-white drop-shadow-md">
-                          {event.title}
-                        </h3> */}
-                      </div>
                     </div>
                   </Link>
                 </motion.div>

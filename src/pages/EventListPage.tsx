@@ -17,9 +17,7 @@ export default function EventsPage() {
 
   const filteredEvents = useMemo(
     () =>
-      eventsData.filter(
-        (e) => selectedDept === "All" || e.department === selectedDept
-      ),
+      eventsData,
     [selectedDept]
   );
 
@@ -43,7 +41,7 @@ export default function EventsPage() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(56,189,248,0.06)_1px,transparent_1px),linear-gradient(rgba(56,189,248,0.04)_1px,transparent_1px)] bg-[size:140px_140px]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <motion.header
           initial={{ opacity: 0, y: 16, filter: "blur(6px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -111,12 +109,12 @@ export default function EventsPage() {
                   {/* Poster frame */}
                   <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden bg-black">
                     <Image
-                      src={event.imageUrl}
+                      src={event.image}
                       alt={event.title}
                       loader={loader}
                       fill
                       className="object-contain transition-transform duration-500"
-                      priority={false}
+                      priority={idx < 3}
                     />
                   </div>
                 </Link>

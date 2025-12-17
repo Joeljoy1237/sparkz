@@ -51,9 +51,12 @@ export default function Header() {
                 {item?.title}
               </Link>
             ))}
-            <button className="inline-flex items-center justify-center z-3 bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-400 gap-2 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:from-indigo-600 hover:via-fuchsia-600 hover:to-amber-500 hover:scale-[1.02] active:scale-95">
+            <Link
+              href={"/login"}
+              className="inline-flex overflow-hidden items-center justify-center bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-400 gap-2 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-white transition-all hover:from-indigo-600 hover:via-fuchsia-600 hover:to-amber-500 hover:scale-[1.02] active:scale-95"
+            >
               Login
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -101,12 +104,13 @@ export default function Header() {
             ))}
 
             {/* Mobile CTA Button */}
-            <button
+            <Link
+              href={"/login"}
               onClick={() => setIsMenuOpen(false)}
               className="w-full mt-6 py-4 text-lg font-semibold text-white rounded-2xl bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-400 hover:from-indigo-600 hover:via-fuchsia-600 hover:to-amber-500 transition-all hover:scale-[1.02] active:scale-95"
             >
               Login
-            </button>
+            </Link>
 
             {/* Close Hint */}
             {/* <p className="mt-8 text-sm text-white/50">Tap anywhere to close</p> */}
