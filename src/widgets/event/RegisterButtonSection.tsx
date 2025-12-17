@@ -100,32 +100,6 @@ const RegisterButtonSection: React.FC<Props> = ({ eventId }) => {
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-fuchsia-500/5 rounded-3xl blur-3xl" />
 
       <div className="relative rounded-3xl border border-white/10 bg-gradient-to-br from-gray-900/80 to-gray-900/60 backdrop-blur-2xl overflow-hidden">
-        {/* Header Section */}
-        <div className="p-8 border-b border-white/10">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div>
-              <h2 className="text-2xl font-bold text-white mb-2">
-                Event Registration
-              </h2>
-              <div className="flex items-center gap-3 text-white/60">
-                <FaCalendarAlt className="text-indigo-400" />
-                <span className="text-sm">
-                  {isOpenForRegistration
-                    ? "Registration Open"
-                    : "Registration Closed"}
-                </span>
-              </div>
-            </div>
-
-            {isOpenForRegistration && (
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30">
-                <div className="h-2 w-2 rounded-full bg-green-400 animate-pulse"></div>
-                <span className="text-sm font-medium text-green-300">Live</span>
-              </div>
-            )}
-          </div>
-        </div>
-
         {/* Main Content */}
         <div className="p-8 space-y-8">
           {/* Countdown Timer Section */}
@@ -137,7 +111,7 @@ const RegisterButtonSection: React.FC<Props> = ({ eventId }) => {
                   Registration closes in
                 </h3>
               </div>
-              <div className="pl-9">
+              <div className="">
                 <CountdownTimer
                   targetDate={event!.regFinalDate}
                   RegCloseTime={event!.RegCloseTime}
@@ -169,7 +143,9 @@ const RegisterButtonSection: React.FC<Props> = ({ eventId }) => {
                   href={`./${eventId}/register`}
                   className="group relative flex items-center justify-center gap-3 w-full rounded-xl bg-gradient-to-r from-indigo-600 via-fuchsia-600 to-amber-500 p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_2rem_-0.5rem_#4f46e5]"
                 >
-                  <span className="text-lg font-bold text-white">Register Now</span>
+                  <span className="text-lg font-bold text-white">
+                    Register Now
+                  </span>
                   <FaArrowRight className="text-white transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </div>

@@ -28,8 +28,12 @@ export const events: Event[] = [
         image: "/event.png",
         type: "nonTechnical",
         bgImage: "https://res.cloudinary.com/day9g145m/image/upload/v1758256855/JUST_IMAGINE_BG_j1foyx.png",
-        date: "22-09-2026",
-        regFinalDate: "22-09-2026",
+        date: "19-12-2025",
+        regFinalDate: "19-12-2025",
+        RegCloseTime: {
+            hours: 1,
+            minutes: 59
+        },
         description: "'Just Imagine' is an exciting and fun-filled event designed to test creativity, quick thinking, and teamwork. In this game, Participants will pair up in teams of two. One member will pick a chit and act out the word or phrase without speaking or lip-syncing, while the other member guesses within a time limit of 2 minutes. The challenge lies in how creatively and accurately the actions are performed and how quickly the partner can guess.",
         venue: "S5/S6 CSE",
         eventType: "Group (2)",

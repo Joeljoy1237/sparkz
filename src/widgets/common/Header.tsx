@@ -53,7 +53,7 @@ export default function Header() {
             ))}
             <Link
               href={"/login"}
-              className="inline-flex overflow-hidden items-center justify-center bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-400 gap-2 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-white transition-all hover:from-indigo-600 hover:via-fuchsia-600 hover:to-amber-500 hover:scale-[1.02] active:scale-95"
+              className="inline-flex overflow-hidden items-center justify-center bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-400 gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white transition-all hover:from-indigo-600 hover:via-fuchsia-600 hover:to-amber-500 hover:scale-[1.02] active:scale-95"
             >
               Login
             </Link>

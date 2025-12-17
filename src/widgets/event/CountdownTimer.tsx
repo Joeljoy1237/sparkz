@@ -249,36 +249,6 @@ export default function CountdownTimer({
             </motion.div>
           ))}
         </div>
-
-        {/* Progress bar */}
-        <div className="mt-6">
-          <div className="flex justify-between text-xs text-white/50 mb-2">
-            <span>Time Remaining</span>
-            <span>
-              {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m
-            </span>
-          </div>
-          <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
-            <motion.div
-              initial={{ width: "100%" }}
-              animate={{
-                width: `${Math.min(
-                  100,
-                  ((timeLeft.days * 24 + timeLeft.hours) / (30 * 24)) * 100
-                )}%`,
-              }}
-              transition={{ duration: 0.5 }}
-              className={`h-full rounded-full ${
-                isCritical
-                  ? "bg-gradient-to-r from-red-500 to-orange-500"
-                  : isUrgent
-                  ? "bg-gradient-to-r from-orange-500 to-amber-500"
-                  : "bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-500"
-              }`}
-            />
-          </div>
-        </div>
-
         {/* Status indicator */}
         <div className="flex items-center justify-center gap-2 mt-4">
           <div
